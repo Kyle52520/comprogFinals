@@ -1,57 +1,94 @@
+
+package libmansys;
+
 import java.util.Scanner;
+import java.util.*;
 
 public class Books {
-    private static String stored[][] = new String[10][3];
+    public static String stored[][] = new String[10][3];
+    public static String[][] books = Books.stored;
+    public static ArrayList<Books>bookList = new ArrayList<Books>();
+    String book,writer,date;
 
+    public Books(String book,String writer,String date){
+            this.book=book;
+            this.writer=writer;
+            this.date=date;
+
+        }
     // DO NOT USE STATIC METHOD IF YOU DONT NEED IT IN THE LIST OF COMMANDS
     public static String list() {
         String[][] books = Books.stored;
+        int newI=1;
+        for (Books book : bookList) { 
+            
+                System.out.println("\n===== BOOK ID: " + newI + " =======");
+                newI++;
+                System.out.println("Name: " + book.book);
+                System.out.println("Author: " + book.writer);
+                System.out.println("Date: " + book.date);
+                
+            
+            }
+        if(bookList.size()==0){
+            System.out.println("\nNO BOOKS HAVE BEEN ADDED YET");
+               
+        
+        }
+
+     
 
         // System.out.println(Arrays.deepToString(books));
 
-        for (int i = 0; i < books.length; i++) {
-            if (books[i][0] != null) {
-                System.out.println("\n===== BOOK ID: " + (i + 1) + " =======");
-                System.out.println("Name: " + books[i][0]);
-                System.out.println("Author: " + books[i][1]);
-                System.out.println("Date: " + books[i][2]);
-            } else if (books[0][0] == null) {
-                System.out.println("\nNO BOOKS HAVE BEEN ADDED YET");
-                break;
-            }
-        }
 
         return "";
     }
 
     public static String set() {
         Scanner inputs = new Scanner(System.in);
+        
 
-        int counter = 1;
-        for (int i = 0; i < Books.stored.length; i++) {
-            for (int j = 0; j < Books.stored[i].length; j++) {
-                if (Books.stored[i][j] == null) {
-                    if (counter == 1) {
+        
                         System.out.println("\nPlease enter the book title:");
-                        Books.stored[i][j] = inputs.nextLine();
-                        counter++;
-                    } else if (counter == 2) {
+                        String title = inputs.nextLine();
+                        
+                  
                         System.out.println("\nPlease enter the book author:");
-                        Books.stored[i][j] = inputs.nextLine();
-                        counter++;
-                    } else if (counter == 3) {
+                        String author = inputs.nextLine();
+                        
+               
                         System.out.println("\nPlease enter the date:");
-                        Books.stored[i][j] = inputs.nextLine();
-                        counter++;
-                    }
-                }
-            }
-            if (counter > 3) {
-                break;
-
-            }
+                        String date = inputs.nextLine();
+                        
+                        Books newBook = new Books(title,author,date);
+                        bookList.add(newBook);
+                    
+             
+                
+            
+           
             System.out.println();
+        
+
+        return "";
+    }
+    
+    public static String get() {
+        Scanner input = new Scanner(System.in);
+        
+        System.out.println("\nPlease enter the book title:");
+        String get = input.nextLine();
+        
+        for (Books book : bookList) {
+            if(book.book.equals(get)){
+                bookList.remove(book);
+                System.out.println("\nUser has taken the book : "+ get);
+            
+            }
         }
+
+        
+         
 
         return "";
     }
