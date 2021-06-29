@@ -1,3 +1,7 @@
+
+package libmansys;
+
+
 import java.util.Scanner;
 import java.lang.reflect.Method;
 
@@ -18,6 +22,8 @@ public class Commands {
                         System.out.println(Users.list());
                     } else if (finCheck[1].equals("set")) {
                         System.out.println(Users.set());
+                    } else if (finCheck[1].equals("select")) {
+                        System.out.println(Users.select());
                     }
                     break;
 
@@ -27,6 +33,8 @@ public class Commands {
                         System.out.println(Books.list());
                     } else if (finCheck[1].equals("set")) {
                         System.out.println(Books.set());
+                    } else if (finCheck[1].equals("get")) {
+                        System.out.println(Books.get());
                     }
                     break;
                 case "Cmds":
@@ -51,7 +59,7 @@ public class Commands {
 
     public static void list() {
         Users users = new Users();
-        Books books = new Books();
+        Books books = new Books("","","");
         System.out.println("\nCommand Lists:");
 
         System.out.println("cmd list");
